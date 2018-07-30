@@ -3,7 +3,7 @@ import FriendCard from "./components/FriendCard";
 import Wrapper from "./components/Wrapper";
 import friends from "./friends.json";
 import "./App.css";
-import JumboTron from "./components/JumboTron";
+import Jumbotron from "./components/Jumbotron";
 import ScoreCard from "./components/ScoreCard";
 
 var friendsList = friends.map(a => {
@@ -71,7 +71,7 @@ class App extends Component {
   render() {
     return (
       <div>
-        <JumboTron />
+        <Jumbotron />
         <ScoreCard
           message={this.state.message}
           score={this.state.score}
