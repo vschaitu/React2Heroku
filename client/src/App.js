@@ -3,6 +3,7 @@ import FriendCard from "./components/FriendCard";
 import Wrapper from "./components/Wrapper";
 import friends from "./friends.json";
 import "./App.css";
+import "./components/FriendCard/FriendCard.css"
 import Jumbotron from "./components/Jumbotron";
 import ScoreCard from "./components/ScoreCard";
 
@@ -14,12 +15,13 @@ var friendsList = friends.map(a => {
 var message = "Click to Begin"
 var score = 0
 var topScore = 0;
+var buzz = false;
 
 class App extends Component {
   // Setting this.state.friends to the friends json array also message , scores
 
   state = {
-    friendsList, message, score, topScore
+    friendsList, message, score, topScore , buzz
   };
 
 
@@ -29,6 +31,7 @@ class App extends Component {
     let index = friendsList.findIndex(a => a.id === id)
 
     if (friendsList[index].selected === false) {
+      buzz = false;
       friendsList[index].selected = true
       if (score === 12) {
         score = 0
@@ -49,6 +52,7 @@ class App extends Component {
     } else {
 
       score = 0;
+      buzz = true;
       message = "Oops! You Guessed it Incorrect..."
       friendsList = friends.map(a => {
         a.selected = false
@@ -56,7 +60,7 @@ class App extends Component {
       });
     }
     friendsList = this.shuffle(friendsList);
-    this.setState({ friendsList, message, score, topScore })
+    this.setState({ friendsList, message, score, topScore, buzz })
   }
 
   shuffle = a => {
@@ -79,14 +83,23 @@ class App extends Component {
         />
         {console.log(this.state)}
         <Wrapper>
-          {this.state.friendsList.map(friend => (
-            <FriendCard
+          {this.state.friendsList.map(friend => 
+            this.state.buzz?
+            (<FriendCard
               handleClickItem={this.handleClickItem}
               id={friend.id}
               key={friend.id}
               image={friend.image}
-            />
-          ))}
+              className="click-item buzz"
+            />) :
+              (<FriendCard
+                handleClickItem={this.handleClickItem}
+                id={friend.id}
+                key={friend.id}
+                image={friend.image}
+                className="click-item"
+              />)
+          )}
         </Wrapper>
       </div>
     );

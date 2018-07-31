@@ -16,7 +16,7 @@
   transform: scale(1.1);
 }
 
-/* .buzz {
+.buzz {
   animation: shake 0.72s cubic-bezier(.36,.07,.19,.97) both;
 }
 
@@ -36,4 +36,4 @@
   40%, 60% {
     transform: translate3d(4px, 0, 0);
   }
-} */
+}
